@@ -1,12 +1,21 @@
 ---
 title: "Welcome To My Blog Template"
-author: "Emi Tanaka"
+author: "Mohammad Yasin"
 date: "2022-07-18"
-categories: [news]
+categories: [article]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+## **Problem Description**
 
-![](thumbnail.jpg)
+::: {style="text-align: justify;"}
+The numbat (Myrmecobius fasciatus), a small, termite-eating marsupial, has faced severe population declines throughout its history in Australia. Weighing between 300g and 752g, numbats have a body length of 175mm to 290mm and a tail measuring 120mm to 210mm. Unlike many mammals, numbats do not have proper teeth but instead have blunt “pegs” since they do not chew their food. Their forefeet, which bear five toes, and hind feet, with four toes, are equipped with strong, sharp claws used for digging termites from the soil.
+
+Historically, numbats inhabited semi-arid and arid woodlands with Eucalyptus and Acacia trees, as well as grasslands. Today, they are restricted to eucalypt woodlands at elevations around 317 meters, where they find shelter in hollow logs. These logs not only offer refuge at night but also provide a place to hide from predators during the day, including birds and foxes. Numbats feed primarily on termites, consuming up to 20,000 termites daily, and have evolved specific physical traits to capture their prey efficiently.
+
+Despite conservation efforts, numbats have experienced dramatic declines, leading to their current endangered status. Although the available dataset includes records from as far back as 1856, this report will focus on the period from 2000 to 2023, analyzing population trends within this timeframe.
+:::
+
+
+![](numbats.jpg)
 
 
