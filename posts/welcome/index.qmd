@@ -23,8 +23,8 @@ Despite conservation efforts, numbats have experienced dramatic declines, leadin
 
 -  The data used in this report was obtained from the TidyTuesday project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.
 
-   We named the data set as **numbats** has 805 observations and 16 variables. The details of the variables are presented in the data dictionary in below @tbl-dictionary :
-
+   We named the data set as **numbats** has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.Below @tbl-dictionary is the glimpse of our data set 
+   
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(dplyr)
@@ -46,56 +46,38 @@ library(sf)
 numbats <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-03-07/numbats.csv')
 ```
 
-
-
-  
-  
-```{r, Dictionary}
+```{r}
 #| label: tbl-dictionary
-#| tbl-cap: "Data Dictionary For Numbats dataset"
+#| tbl-cap: "Glimpse Numbats dataset"
 #| warning: false
 #| message: false
 #| echo: false
 
-desc <- tibble(
+glimpse_table <- tibble(
   variable = c("decimalLatitude", "decimalLongitude", "eventDate", "scientificName", 
-               "taxonConceptID", "recordID", "dataResourceName", "year", "month", 
-               "wday", "hour", "day", "dryandra", "prcp", "tmax", "tmin"),
-  class = c("double", "double", "datetime", "factor", 
-            "factor", "character", "factor", "integer", 
-            "factor", "factor", "integer", "date", 
-            "logical", "double", "double", "double"),
-  description = c(
-    "Latitude coordinates",
-    "Longitude coordinates of the sighting location.",
-    "Date when the sighting occurred.",
-    "Scientific name of the species, 'undefined'",
-    "Unique identifier for the taxon concept associated with the species.",
-    "Unique identifier for each occurrence record.",
-    "Name of the data resource or organization providing the data",
-    "The 4-digit year of the event (when available)",
-    "The 3-letter month abbreviation of the event (when available)",
-    "The 3-letter weekday abbreviation of the event (when available)",
-    "The hour of the event (when available)",
-    "The date of the event (when available)",
-    "Whether the observation was in Dryandra Woodland",
-    "Precipitation on that day in Dryandra Woodland (when relevant), in millimeters",
-    "Maximum temperature on that day in Dryandra Woodland (when relevant), in degrees Celsius",
-    "Minimum temperature on that day in Dryandra Woodland (when relevant), in degrees Celsius"
-  )
+               "taxonConceptID", "recordID", "dataResourceName", "year", 
+               "month", "wday", "hour", "day", "dryandra", "prcp", "tmax", "tmin"),
+  type = c("double", "double", "datetime", "character", "character", "character", 
+           "character", "double", "character", "character", "integer", "date", 
+           "logical", "double", "double", "double"),
+  example_value = c("-37.65000", "145.5333", "2014-06-05 02:00:00", 
+                    "Myrmecobius fasciatus", 
+                    "https://biodiversity.org.au/afd/taxa/6c72d199-fof1-44d3-8197-224a2f7cff5f", 
+                    "73830609-3d94-461f-a833-01c0a30c5a0d", 
+                    "Queen Victoria Museum Art Gallery provider for OZCAM", 
+                    "2014", "Jun", "Thu", "13", "2014-06-05", "FALSE", 
+                    "1.2", "15.6", "1.5")  
 )
 
-# Generate the table with your specified formatting
-kbl(desc, table.attr = 'data-quarto-disable-processing="true"') |>
-  kable_styling(full_width = FALSE) |>
-  column_spec(1, width = "2cm", border_right = TRUE) |>
-  column_spec(2, width = "2cm", border_right = TRUE) |>
-  column_spec(3, width = "10cm")
+
+kbl(glimpse_table, caption = "Summary of Numbats Dataset with Specific Values") %>%
+  kable_styling(full_width = FALSE)
+
 ```
 
- The data set has five types of variables which can be seen in below @fig-datatype :
 
-```{r, data type}
+
+```{r, data type, eval=FALSE}
 #| label: fig-datatype
 #| fig-cap: "Data Type"
 #| warning: false
@@ -110,8 +92,11 @@ visdat::vis_dat(numbats_clean
 ```
 
 
--  The data was sourced from the Global Historical Climatology Network Daily (GHCND) using the ghcnd_stations() function. The dataset was filtered for Australian stations (ID starting with “ASN”) and records from 2020 onwards. Key variables such as precipitation (PRCP), maximum temperature (TMAX), and minimum temperature (TMIN) were selected. The data was processed by converting station names to lowercase and WMO IDs to numeric format. Only stations with complete data for all three elements were retained, ensuring the integrity and suitability of the dataset for analysis. For this dataset, I used the below code and named it aus_stations. The final dataset consists of 643 observations and 6 variables. The data dictionary is provided below in @tbl-stationsdataset :
 
+-  The data was sourced from the Global Historical Climatology Network Daily (GHCND) using the ghcnd_stations() function. The dataset was filtered for Australian stations (ID starting with “ASN”). The dataset consists of 643 observations and 6 variables and was named aus_stations. and includes key variables such as the latitude and longitude coordinates, elevation, station name, station id and WMO ID. 
+
+   The variables in the dataset include the station IDs, which identify each Australian station, and the latitude and longitude values that provide the geographic location of the station. The elevation variable records the height of the station above sea level in meters, while the station name provides a label for the station. Lastly, the WMO ID is the numeric identifier assigned to each station by the World Meteorological Organization.
+   
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 aus_stations <- ghcnd_stations() |>
   filter(str_starts(id, "ASN")) |>
@@ -127,42 +112,13 @@ aus_stations <- ghcnd_stations() |>
 ```
 
 
-```{r}
-#| label: tbl-stationsdataset
-#| tbl-cap: "Data Dictionary For Australian Weather Stations dataset"
-#| warning: false
-#| message: false
-#| echo: false
-
-desc <- tibble(
-  variable = c("id", "latitude", "longitude", "elevation", "name", "wmo_id"),
-  class = c("character", "double", "double", "double", "character", "integer"),
-  description = c(
-    "Unique identifier for the weather station in Australia (GHCND).",
-    "Latitude coordinates of the weather station (in decimal degrees).",
-    "Longitude coordinates of the weather station (in decimal degrees).",
-    "Elevation of the weather station above sea level (in meters).",
-    "Name or location of the weather station.",
-    "World Meteorological Organization station identifier."
-  )
-)
-
-# Generate the table with your specified formatting
-kbl(desc, table.attr = 'data-quarto-disable-processing="true"') |>
-  kable_styling(full_width = FALSE) |>
-  column_spec(1, width = "2cm", border_right = TRUE) |>
-  column_spec(2, width = "2cm", border_right = TRUE) |>
-  column_spec(3, width = "10cm")
-
-```
-
 
 -  The first step of the data cleaning process involved filtering out rows with missing values in the year column and retaining only records from the year 2000 onwards. This was accomplished using the filter() function with the conditions !is.na(year) to remove rows where the year is missing, and year >= 2000 to include only observations from the year 2000 and later. This ensures that the dataset is clean and focused on the relevant timeframe for analysis..
 
 ```{r, message=FALSE,warning=FALSE}
 numbats_new <- numbats |> 
-  filter(!is.na(year),
-         year>=2000)  # remove the missing value
+  filter(!is.na(year),# remove the missing value
+         year>=2000)  
 
 ```
 

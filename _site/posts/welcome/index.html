@@ -200,130 +200,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-description"><strong>Data Description</strong></h2>
 <ul>
 <li><p>The data used in this report was obtained from the TidyTuesday project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.</p>
-<p>We named the data set as <strong>numbats</strong> has 805 observations and 16 variables. The details of the variables are presented in the data dictionary in below <a href="#tbl-dictionary" class="quarto-xref">Table&nbsp;1</a> :</p></li>
+<p>We named the data set as <strong>numbats</strong> has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.Below <a href="#tbl-dictionary" class="quarto-xref">Table&nbsp;1</a> is the glimpse of our data set</p></li>
 </ul>
 <div class="cell">
 <div id="tbl-dictionary" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dictionary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Data Dictionary For Numbats dataset
+Table&nbsp;1: Glimpse Numbats dataset
 </figcaption>
 <div aria-describedby="tbl-dictionary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table data-quarto-disable-processing="true" class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> variable </th>
-   <th style="text-align:left;"> class </th>
-   <th style="text-align:left;"> description </th>
-  </tr>
- </thead>
+<div>
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Summary of Numbats Dataset with Specific Values</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">example_value</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> decimalLatitude </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Latitude coordinates </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> decimalLongitude </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Longitude coordinates of the sighting location. </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> eventDate </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> datetime </td>
-   <td style="text-align:left;width: 10cm; "> Date when the sighting occurred. </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> scientificName </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> factor </td>
-   <td style="text-align:left;width: 10cm; "> Scientific name of the species, 'undefined' </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> taxonConceptID </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> factor </td>
-   <td style="text-align:left;width: 10cm; "> Unique identifier for the taxon concept associated with the species. </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> recordID </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> character </td>
-   <td style="text-align:left;width: 10cm; "> Unique identifier for each occurrence record. </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> dataResourceName </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> factor </td>
-   <td style="text-align:left;width: 10cm; "> Name of the data resource or organization providing the data </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> year </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> integer </td>
-   <td style="text-align:left;width: 10cm; "> The 4-digit year of the event (when available) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> month </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> factor </td>
-   <td style="text-align:left;width: 10cm; "> The 3-letter month abbreviation of the event (when available) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> wday </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> factor </td>
-   <td style="text-align:left;width: 10cm; "> The 3-letter weekday abbreviation of the event (when available) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> hour </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> integer </td>
-   <td style="text-align:left;width: 10cm; "> The hour of the event (when available) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> day </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> date </td>
-   <td style="text-align:left;width: 10cm; "> The date of the event (when available) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> dryandra </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> logical </td>
-   <td style="text-align:left;width: 10cm; "> Whether the observation was in Dryandra Woodland </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> prcp </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Precipitation on that day in Dryandra Woodland (when relevant), in millimeters </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> tmax </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Maximum temperature on that day in Dryandra Woodland (when relevant), in degrees Celsius </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> tmin </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Minimum temperature on that day in Dryandra Woodland (when relevant), in degrees Celsius </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">decimalLatitude</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">-37.65000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">decimalLongitude</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">145.5333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">eventDate</td>
+<td style="text-align: left;">datetime</td>
+<td style="text-align: left;">2014-06-05 02:00:00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scientificName</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Myrmecobius fasciatus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">taxonConceptID</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">https://biodiversity.org.au/afd/taxa/6c72d199-fof1-44d3-8197-224a2f7cff5f</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recordID</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">73830609-3d94-461f-a833-01c0a30c5a0d</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dataResourceName</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Queen Victoria Museum Art Gallery provider for OZCAM</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">2014</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">month</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Jun</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wday</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Thu</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hour</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">day</td>
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">2014-06-05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dryandra</td>
+<td style="text-align: left;">logical</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prcp</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">1.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmax</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">15.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tmin</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">1.5</td>
+</tr>
 </tbody>
 </table>
 
+
+</div>
 </div>
 </div>
 </figure>
-</div>
-</div>
-<p>The data set has five types of variables which can be seen in below <a href="#fig-datatype" class="quarto-xref">Figure&nbsp;1</a> :</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-datatype" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-datatype-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-datatype-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datatype-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Data Type
-</figcaption>
-</figure>
-</div>
 </div>
 </div>
 <ul>
-<li>The data was sourced from the Global Historical Climatology Network Daily (GHCND) using the ghcnd_stations() function. The dataset was filtered for Australian stations (ID starting with “ASN”) and records from 2020 onwards. Key variables such as precipitation (PRCP), maximum temperature (TMAX), and minimum temperature (TMIN) were selected. The data was processed by converting station names to lowercase and WMO IDs to numeric format. Only stations with complete data for all three elements were retained, ensuring the integrity and suitability of the dataset for analysis. For this dataset, I used the below code and named it aus_stations. The final dataset consists of 643 observations and 6 variables. The data dictionary is provided below in <a href="#tbl-stationsdataset" class="quarto-xref">Table&nbsp;2</a> :</li>
+<li><p>The data was sourced from the Global Historical Climatology Network Daily (GHCND) using the ghcnd_stations() function. The dataset was filtered for Australian stations (ID starting with “ASN”). The dataset consists of 643 observations and 6 variables and was named aus_stations. and includes key variables such as the latitude and longitude coordinates, elevation, station name, station id and WMO ID.</p>
+<p>The variables in the dataset include the station IDs, which identify each Australian station, and the latitude and longitude values that provide the geographic location of the station. The elevation variable records the height of the station above sea level in meters, while the station name provides a label for the station. Lastly, the WMO ID is the numeric identifier assigned to each station by the World Meteorological Organization.</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>aus_stations <span class="ot">&lt;-</span> <span class="fu">ghcnd_stations</span>() <span class="sc">|&gt;</span></span>
@@ -338,68 +328,13 @@ Figure&nbsp;1: Data Type
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nrow</span>(data) <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div id="tbl-stationsdataset" class="cell quarto-float anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stationsdataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Data Dictionary For Australian Weather Stations dataset
-</figcaption>
-<div aria-describedby="tbl-stationsdataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table data-quarto-disable-processing="true" class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> variable </th>
-   <th style="text-align:left;"> class </th>
-   <th style="text-align:left;"> description </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> id </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> character </td>
-   <td style="text-align:left;width: 10cm; "> Unique identifier for the weather station in Australia (GHCND). </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> latitude </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Latitude coordinates of the weather station (in decimal degrees). </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> longitude </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Longitude coordinates of the weather station (in decimal degrees). </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> elevation </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> double </td>
-   <td style="text-align:left;width: 10cm; "> Elevation of the weather station above sea level (in meters). </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> name </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> character </td>
-   <td style="text-align:left;width: 10cm; "> Name or location of the weather station. </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> wmo_id </td>
-   <td style="text-align:left;width: 2cm; border-right:1px solid;"> integer </td>
-   <td style="text-align:left;width: 10cm; "> World Meteorological Organization station identifier. </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</figure>
-</div>
-</div>
 <ul>
 <li>The first step of the data cleaning process involved filtering out rows with missing values in the year column and retaining only records from the year 2000 onwards. This was accomplished using the filter() function with the conditions !is.na(year) to remove rows where the year is missing, and year &gt;= 2000 to include only observations from the year 2000 and later. This ensures that the dataset is clean and focused on the relevant timeframe for analysis..</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>numbats_new <span class="ot">&lt;-</span> numbats <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(year),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2000</span>)  <span class="co"># remove the missing value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(year),<span class="co"># remove the missing value</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2000</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
