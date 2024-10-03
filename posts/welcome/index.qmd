@@ -2,13 +2,15 @@
 title: "Welcome To My Blog Template"
 author: "Mohammad Yasin"
 date: "2022-07-18"
+bibliography: references.bib
 categories: [article]
 ---
 
 ## **Problem Description**
 
 ::: {style="text-align: justify;"}
-The numbat (Myrmecobius fasciatus), a small, termite-eating marsupial, has faced severe population declines throughout its history in Australia. Weighing between 300g and 752g, numbats have a body length of 175mm to 290mm and a tail measuring 120mm to 210mm. Unlike many mammals, numbats do not have proper teeth but instead have blunt “pegs” since they do not chew their food. Their forefeet, which bear five toes, and hind feet, with four toes, are equipped with strong, sharp claws used for digging termites from the soil.
+The numbat (Myrmecobius fasciatus), a small, termite-eating marsupial, has faced severe po
+pulation declines throughout its history in Australia. Weighing between 300g and 752g, numbats have a body length of 175mm to 290mm and a tail measuring 120mm to 210mm. Unlike many mammals, numbats do not have proper teeth but instead have blunt “pegs” since they do not chew their food. Their forefeet, which bear five toes, and hind feet, with four toes, are equipped with strong, sharp claws used for digging termites from the soil [@Numbat_wikipedia].
 
 Historically, numbats inhabited semi-arid and arid woodlands with Eucalyptus and Acacia trees, as well as grasslands. Today, they are restricted to eucalypt woodlands at elevations around 317 meters, where they find shelter in hollow logs. These logs not only offer refuge at night but also provide a place to hide from predators during the day, including birds and foxes. Numbats feed primarily on termites, consuming up to 20,000 termites daily, and have evolved specific physical traits to capture their prey efficiently.
 
@@ -21,7 +23,7 @@ Despite conservation efforts, numbats have experienced dramatic declines, leadin
 ## **Data Description**
 
 
--  The data used in this report was obtained from the TidyTuesday project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.
+-  The data used in this report was obtained from the TidyTuesday [@tidytuesday] project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.
 
    We named the data set as **numbats** has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.Below @tbl-dictionary is the glimpse of our data set 
    
@@ -205,5 +207,6 @@ It's important to note that there are missing values for the years 2001 to 2005 
 
 :::
 
+## References
 
 

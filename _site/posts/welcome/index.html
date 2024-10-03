@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,10 +91,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -190,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="problem-description" class="level2">
 <h2 class="anchored" data-anchor-id="problem-description"><strong>Problem Description</strong></h2>
 <div style="text-align: justify;">
-<p>The numbat (Myrmecobius fasciatus), a small, termite-eating marsupial, has faced severe population declines throughout its history in Australia. Weighing between 300g and 752g, numbats have a body length of 175mm to 290mm and a tail measuring 120mm to 210mm. Unlike many mammals, numbats do not have proper teeth but instead have blunt “pegs” since they do not chew their food. Their forefeet, which bear five toes, and hind feet, with four toes, are equipped with strong, sharp claws used for digging termites from the soil.</p>
+<p>The numbat (Myrmecobius fasciatus), a small, termite-eating marsupial, has faced severe po pulation declines throughout its history in Australia. Weighing between 300g and 752g, numbats have a body length of 175mm to 290mm and a tail measuring 120mm to 210mm. Unlike many mammals, numbats do not have proper teeth but instead have blunt “pegs” since they do not chew their food. Their forefeet, which bear five toes, and hind feet, with four toes, are equipped with strong, sharp claws used for digging termites from the soil <span class="citation" data-cites="Numbat_wikipedia">(<a href="#ref-Numbat_wikipedia" role="doc-biblioref">wikipedia 2024</a>)</span>.</p>
 <p>Historically, numbats inhabited semi-arid and arid woodlands with Eucalyptus and Acacia trees, as well as grasslands. Today, they are restricted to eucalypt woodlands at elevations around 317 meters, where they find shelter in hollow logs. These logs not only offer refuge at night but also provide a place to hide from predators during the day, including birds and foxes. Numbats feed primarily on termites, consuming up to 20,000 termites daily, and have evolved specific physical traits to capture their prey efficiently.</p>
 <p>Despite conservation efforts, numbats have experienced dramatic declines, leading to their current endangered status. Although the available dataset includes records from as far back as 1856, this report will focus on the period from 2000 to 2023, analyzing population trends within this time frame.</p>
 </div>
@@ -199,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-description" class="level2">
 <h2 class="anchored" data-anchor-id="data-description"><strong>Data Description</strong></h2>
 <ul>
-<li><p>The data used in this report was obtained from the TidyTuesday project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.</p>
+<li><p>The data used in this report was obtained from the TidyTuesday <span class="citation" data-cites="tidytuesday">(<a href="#ref-tidytuesday" role="doc-biblioref">tidytuseday 2023</a>)</span> project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.</p>
 <p>We named the data set as <strong>numbats</strong> has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.Below <a href="#tbl-dictionary" class="quarto-xref">Table&nbsp;1</a> is the glimpse of our data set</p></li>
 </ul>
 <div class="cell">
@@ -382,12 +402,23 @@ Figure&nbsp;2: Sightings of Numbats
 <p>The data shows that sightings were minimal in the early 2000s, with a sharp increase starting in 2007. A significant spike occurred in 2014, where the number of recorded sightings peaked dramatically, far surpassing other years. This surge could be due to increased observation efforts, improved reporting mechanisms, or possibly environmental factors that led to a temporary rise in Numbat visibility. Following this spike, the number of sightings fluctuated but remained relatively stable between 2015 and 2023, though never reaching the heights seen in 2014. These fluctuations could indicate changing environmental conditions, habitat loss, or other challenges affecting the Numbat population.</p>
 <p>It’s important to note that there are missing values for the years 2001 to 2005 and 2012, during which no sightings were recorded. This gap in the data may suggest a lack of reporting or data collection during those years, which leaves some uncertainty in understanding the Numbat population trend during those periods.</p>
 </div>
+</section>
+</section>
+<section id="references" class="level2">
+
+
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-tidytuesday" class="csl-entry" role="listitem">
+tidytuseday. 2023. <em>GitHub</em>. <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-03-07/readme.md">https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-03-07/readme.md</a>.
+</div>
+<div id="ref-Numbat_wikipedia" class="csl-entry" role="listitem">
+wikipedia. 2024. <em>Wikipedia</em>. <a href="https://en.wikipedia.org/w/index.php?title=Numbat&amp;oldid=1242639989">https://en.wikipedia.org/w/index.php?title=Numbat&amp;oldid=1242639989</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

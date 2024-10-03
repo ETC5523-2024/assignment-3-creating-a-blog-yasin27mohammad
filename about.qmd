@@ -1,13 +1,27 @@
 ---
 title: "About"
-image: profile.jpg
+image: Mohammad Yasin.jpg
 about:
-  template: jolla
+  template: broadside
   links:
     - icon: github
       text: Github
-      href: https://github.com/etc5523-2022
+      href: https://github.com/ETC5523-2024/assignment-3-creating-a-blog-yasin27mohammad
 
 ---
 
-This is a blog template for the ETC5523 Communicating with Data assessment at Monash University.
+# Mohammad Yasin
+
+I am a Master of Business Analytics student at Monash University, with a strong passion for data-driven projects across various industries. If you have any inquiries or would like to collaborate on a project, feel free to get in touch using the links provided.
+
+## My Interests:
+- Data Analytics and Business Intelligence
+- Machine Learning and Predictive Modelling
+- Data Communication and Visualization
+- Supply Chain Analytics
+- Statistical Analysis and Workflow Automation
+
+I am committed to the re-use of historical datasets and performing transparent analysis, while ensuring the privacy of the individuals whose data is being analyzed. I have an active GitHub profile where you can find many of my publicly available projects.
+
+Feel free to connect with me on LinkedIn, GitHub, or through any of the platforms listed above!
+
