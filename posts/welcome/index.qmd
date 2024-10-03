@@ -9,12 +9,9 @@ categories: [article]
 ## **Problem Description**
 
 ::: {style="text-align: justify;"}
-The numbat (Myrmecobius fasciatus), a small, termite-eating marsupial, has faced severe po
-pulation declines throughout its history in Australia. Weighing between 300g and 752g, numbats have a body length of 175mm to 290mm and a tail measuring 120mm to 210mm. Unlike many mammals, numbats do not have proper teeth but instead have blunt “pegs” since they do not chew their food. Their forefeet, which bear five toes, and hind feet, with four toes, are equipped with strong, sharp claws used for digging termites from the soil [@Numbat_wikipedia].
+The numbat (Myrmecobius fasciatus) is a small, termite-eating marsupial native to Australia, currently classified as endangered. Once widespread across the country, numbats are now confined to small, isolated areas of eucalypt woodlands due to habitat destruction, predation by invasive species, and environmental changes. Today, fewer than 1,000 numbats remain in the wild, with sightings concentrated mainly in southwestern Australia.
 
-Historically, numbats inhabited semi-arid and arid woodlands with Eucalyptus and Acacia trees, as well as grasslands. Today, they are restricted to eucalypt woodlands at elevations around 317 meters, where they find shelter in hollow logs. These logs not only offer refuge at night but also provide a place to hide from predators during the day, including birds and foxes. Numbats feed primarily on termites, consuming up to 20,000 termites daily, and have evolved specific physical traits to capture their prey efficiently.
-
-Despite conservation efforts, numbats have experienced dramatic declines, leading to their current endangered status. Although the available dataset includes records from as far back as 1856, this report will focus on the period from 2000 to 2023, analyzing population trends within this time frame.
+This report focuses on analyzing numbat population trends and sightings between 2000 and 2023, including their geographical distribution and seasonal activity patterns. By examining these trends, we aim to provide insights that will support ongoing conservation efforts to protect this unique species..
 :::
 
 
@@ -26,6 +23,7 @@ Despite conservation efforts, numbats have experienced dramatic declines, leadin
 -  The data used in this report was obtained from the TidyTuesday [@tidytuesday] project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.
 
    We named the data set as **numbats** has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.Below @tbl-dictionary is the glimpse of our data set 
+
    
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -50,54 +48,8 @@ library(rnaturalearthdata)
 numbats <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-03-07/numbats.csv')
 ```
 
-```{r}
-#| label: tbl-dictionary
-#| tbl-cap: "Glimpse Numbats dataset"
-#| warning: false
-#| message: false
-#| echo: false
 
-glimpse_table <- tibble(
-  variable = c("decimalLatitude", "decimalLongitude", "eventDate", "scientificName", 
-               "taxonConceptID", "recordID", "dataResourceName", "year", 
-               "month", "wday", "hour", "day", "dryandra", "prcp", "tmax", "tmin"),
-  type = c("double", "double", "datetime", "character", "character", "character", 
-           "character", "double", "character", "character", "integer", "date", 
-           "logical", "double", "double", "double"),
-  example_value = c("-37.65000", "145.5333", "2014-06-05 02:00:00", 
-                    "Myrmecobius fasciatus", 
-                    "https://biodiversity.org.au/afd/taxa/6c72d199-fof1-44d3-8197-224a2f7cff5f", 
-                    "73830609-3d94-461f-a833-01c0a30c5a0d", 
-                    "Queen Victoria Museum Art Gallery provider for OZCAM", 
-                    "2014", "Jun", "Thu", "13", "2014-06-05", "FALSE", 
-                    "1.2", "15.6", "1.5")  
-)
-
-
-kbl(glimpse_table, caption = "Summary of Numbats Dataset with Specific Values") %>%
-  kable_styling(full_width = FALSE)
-
-```
-
-
-
-```{r, data type, eval=FALSE}
-#| label: fig-datatype
-#| fig-cap: "Data Type"
-#| warning: false
-#| message: false
-#| echo: false
-
-numbats_clean <- na.omit(numbats)
-
-
-visdat::vis_dat(numbats_clean
-                )
-```
-
-
-
--  The data was sourced from the Global Historical Climatology Network Daily (GHCND) using the ghcnd_stations() function. The dataset was filtered for Australian stations (ID starting with “ASN”). The dataset consists of 643 observations and 6 variables and was named aus_stations. and includes key variables such as the latitude and longitude coordinates, elevation, station name, station id and WMO ID. 
+-  We also took data from the Global Historical Climatology Network Daily (GHCND) using the **ghcnd_stations()** function. The dataset was filtered for Australian stations (ID starting with “ASN”). The dataset consists of 643 observations and 6 variables and was named **aus_stations**. and includes key variables such as the latitude and longitude coordinates, elevation, station name, station id and WMO ID. 
 
    The variables in the dataset include the station IDs, which identify each Australian station, and the latitude and longitude values that provide the geographic location of the station. The elevation variable records the height of the station above sea level in meters, while the station name provides a label for the station. Lastly, the WMO ID is the numeric identifier assigned to each station by the World Meteorological Organization.
    
@@ -117,15 +69,43 @@ aus_stations <- ghcnd_stations() |>
 
 
 
--  The first step of the data cleaning process involved filtering out rows with missing values in the year column and retaining only records from the year 2000 onwards. This was accomplished using the filter() function with the conditions !is.na(year) to remove rows where the year is missing, and year >= 2000 to include only observations from the year 2000 and later. This ensures that the dataset is clean and focused on the relevant timeframe for analysis..
+-  The data cleaning process began by filtering out records from zoo and museum sources to ensure the dataset focuses exclusively on natural numbat sightings. This was achieved using the **filter()** function with the condition **!(dataResourceName %in% c(...))**, where I listed specific museums and institutional providers. By excluding these sources, I ensured that only natural sightings are included.In addition, I filtered out rows with missing values in the year column and restricted the dataset to records from the year 2000 onwards using **!is.na(year)** and **year >= 2000**. This step ensured that the dataset is focused on the relevant time frame for the analysis.Finally, I removed irrelevant columns that were not needed for this analysis, including dryandra, prcp (precipitation), tmax (maximum temperature), and tmin (minimum temperature), to streamline the dataset and keep only the necessary information for further analysis.
 
-```{r, message=FALSE,warning=FALSE}
+    After cleaning the dataset, the dataResourceName variable contains the following (@tbl-source) categories of data sources. The table below also includes the total number of sightings recorded by each source, reflecting only natural sightings that occurred in Australia between 2000 and 2023.
+
+```{r,echo=FALSE, message=FALSE,warning=FALSE}
 numbats_new <- numbats |> 
-  filter(!is.na(year),# remove the missing value
-         year>=2000)  
+  
+  filter(!(dataResourceName %in% c("Queen Victoria Museum Art Gallery provider for OZCAM",
+                                   "Western Australian Museum provider for OZCAM",
+                                   "Queensland Museum provider for OZCAM",
+                                   "Museums Victoria provider for OZCAM",
+                                   "Northern Territory Museum and Art Gallery provider for OZCAM",
+                                   "South Australian Museum Adelaide provider for OZCAM",
+                                   "Australian Museum provider for OZCAM")),
+         !is.na(year),
+         year>=2000)|>
+    select(-c("dryandra", "prcp" , "tmax" , "tmin"))
 
 ```
 
+   
+  
+```{r}
+#| label: tbl-source
+#| tbl-cap: "Natural sightings source of numbats"
+#| warning: false
+#| message: false
+#| echo: false
+natural_sightings_summary <- numbats_new%>%
+  group_by(dataResourceName) %>%
+  summarise(total_sightings = n())
+
+# Display the table
+natural_sightings_summary %>%
+  kbl(caption = "Total Numbat Sightings in Nature") %>%
+  kable_styling(full_width = FALSE)
+```
 
 ## **Analysis**
 
@@ -133,36 +113,43 @@ numbats_new <- numbats |>
 
 :::{style="text-align: justify;"}
 
-First, we look at the distribution of Numbat sightings across Australia, which gives us an idea about the regions where these sightings are most frequent. Understanding the location of these sightings helps us identify potential habitats, areas of conservation focus, and regions where Numbat populations are thriving or struggling. For this purpose, a map is the best way to visualize the geographic spread of Numbats and to make the data more accessible and understandable.
+First, we examine the distribution of Numbat sightings across Australia, which provides insight into the regions where these sightings are most frequent. By understanding the locations of these sightings, we can identify potential habitats, key areas for conservation focus, and regions where Numbat populations may be thriving or facing challenges. A map is an ideal tool to visualize the geographic spread of Numbats, making the data more accessible and easier to interpret.
+
 
 ```{r}
 #| label: fig-map
-#| fig-cap: "Numbats"
+#| fig-cap: "Numbat Sightings in Australia"
+#| fig-width: 10    # Keep reasonable width
+#| fig-height: 6    # Keep reasonable height
 #| warning: false
 #| message: false
 #| echo: false
 
-
 # Get the map of Australia with state boundaries
 australia_map <- ne_states(country = "Australia", returnclass = "sf")
 
-# Plot the map with sighting points
+# Define the bounding box for zooming into the sighting region
+sighting_bbox <- st_bbox(c(xmin = 110, xmax = 155, ymin = -40, ymax = -25))  # Adjust to zoom on sightings
+
+# Plot the map with sighting points and zoom into the region
 ggplot() +
-  geom_sf(data = australia_map, fill = "white", color = "lightgray") +  # Map of Australia
+  geom_sf(data = australia_map, fill = "lightgray", color = "black") +  # Map of Australia
   geom_point(data = numbats_new, aes(x = decimalLongitude, y = decimalLatitude), 
-             color = "red", size = 2
-             , alpha = 0.4) +  # Orange points for sightings
+             color = "blue", size = 3, alpha = 0.8) +  # Larger points with higher opacity
+  coord_sf(xlim = c(sighting_bbox["xmin"], sighting_bbox["xmax"]), 
+           ylim = c(sighting_bbox["ymin"], sighting_bbox["ymax"])) +  # Zoom into the sighting region
   theme_void() +  # Removes axis, background for minimalist look
   theme(
     panel.background = element_rect(fill = "#e5e7eb", color = NA),  # Light gray background
-    plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),  # Centered title
-    plot.margin = margin(10, 10, 10, 10)  # Add some margin around the plot
+    plot.title = element_text(hjust = 0.5, size = 22, face = "bold"),  # Larger, centered title
+    plot.margin = margin(5, 5, 5, 5)  # Reduce margins for better fit
   ) +
   labs(title = "Numbat Sightings in Australia")
+
 ```
 
 
-The map @fig-map highlights the locations of Numbat sightings, with red dot representing sightings. As seen, sightings are concentrated mainly in the southern and western parts of the country, with a particularly dense cluster in the southwest. This visualization is useful for assessing the spatial distribution of Numbats and identifying conservation hotspots. By analyzing these patterns, conservationists and researchers can gain valuable insights into where efforts might be focused to protect this endangered species.
+@fig-map highlights the locations of Numbat sightings, with blue dots representing the recorded sightings. These sightings are primarily concentrated in the southern and western parts of Australia, with a particularly dense cluster in the southwest region of Western Australia. This visualization is useful for assessing the spatial distribution of Numbats and identifying conservation hotspots. By analyzing these patterns, conservationists and researchers can gain valuable insights into where efforts might be focused to protect this endangered species.
 
 This map serves as a foundation for further research into environmental factors, such as climate and habitat type, that might be influencing the distribution of Numbats. Ultimately, this visualization is a crucial tool in understanding how to manage and protect the Numbat population in Australia.
 :::
@@ -200,10 +187,56 @@ ggplot(numbats_year, aes(x = year, y = count)) +
        y = "Number of Numbats") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 ```
+
 The data shows that sightings were minimal in the early 2000s, with a sharp increase starting in 2007. A significant spike occurred in 2014, where the number of recorded sightings peaked dramatically, far surpassing other years. This surge could be due to increased observation efforts, improved reporting mechanisms, or possibly environmental factors that led to a temporary rise in Numbat visibility.
 Following this spike, the number of sightings fluctuated but remained relatively stable between 2015 and 2023, though never reaching the heights seen in 2014. These fluctuations could indicate changing environmental conditions, habitat loss, or other challenges affecting the Numbat population.
 
 It's important to note that there are missing values for the years 2001 to 2005 and 2012, during which no sightings were recorded. This gap in the data may suggest a lack of reporting or data collection during those years, which leaves some uncertainty in understanding the Numbat population trend during those periods.
+
+:::
+
+#### <u>**Part 3:Seasonal Patterns of Numbat Sightings: Best Times for Observation and Conservation**</u>
+
+:::{style="text-align: justify;"}
+
+Continuing from the previous section, where we explored the trend of Numbat sightings between 2000 and 2023, we now turn our attention to the seasonal trends in sightings. This section compares the sightings across different seasons, aiming to uncover patterns in Numbat activity throughout the year. Understanding these seasonal trends is crucial for conservation efforts and for researchers interested in the behaviors of Numbats in their natural habitats.
+
+```{r}
+#| label: fig-season
+#| fig-cap: "Sightings by Season"
+#| warning: false
+#| message: false
+#| echo: false
+
+numbats_new <- numbats_new %>%
+  mutate(season = case_when(
+    month %in% c("Dec", "Jan", "Feb") ~ "Summer",
+    month %in% c("Mar", "Apr", "May") ~ "Autumn",
+    month %in% c("Jun", "Jul", "Aug") ~ "Winter",
+    month %in% c("Sep", "Oct", "Nov") ~ "Spring"
+  ))
+
+# Count the number of sightings per season
+season_sightings <- numbats_new %>%
+  group_by(season) %>%
+  summarise(total_sightings = n())
+
+# Plotting the number of sightings per season
+ggplot(season_sightings, aes(x = season, y = total_sightings, fill = season)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Numbat Sightings by Season",
+       x = "Season", 
+       y = "Number of Sightings") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Spring" = "skyblue", "Summer" = "lightcoral", 
+                               "Winter" = "lightgreen", "Autumn" = "lightgoldenrod"))
+
+
+```
+
+@fig-season shows the number of Numbat sightings across the four seasons. Spring has the highest number of sightings, likely due to favorable conditions such as mild temperatures and abundant food. Summer follows, while Winter records the fewest sightings, suggesting reduced Numbat activity during the colder months.
+
+For both visitors and researchers, Spring and Summer offer the best chances to observe Numbats in the wild. Tourists visiting during these months are more likely to witness Numbat activity, making it an ideal time for wildlife enthusiasts. This seasonal pattern also provides key insights for conservation efforts, helping to focus research and fieldwork when Numbats are more active and visible. Further research during the colder months could provide a better understanding of their habitat use and behavior, improving strategies for conservation and public engagement.
 
 :::
 
