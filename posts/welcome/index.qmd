@@ -3,7 +3,7 @@ title: "Numbat Sightings in Australia: A Conservation Study from 2000 to 2023"
 author: "Mohammad Yasin"
 date: "2024-10-04"
 bibliography: references.bib
-categories: [article]
+categories: [Blog]
 ---
 
 ## **Problem Description**
