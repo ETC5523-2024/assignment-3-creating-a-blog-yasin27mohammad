@@ -211,7 +211,7 @@ Continuing from the previous section, where we explored the trend of Numbat sigh
 #| message: false
 #| echo: false
 
-numbats_new <- numbats_new %>%
+numbats_new <- numbats_new |>
   mutate(season = case_when(
     month %in% c("Dec", "Jan", "Feb") ~ "Summer",
     month %in% c("Mar", "Apr", "May") ~ "Autumn",
@@ -221,8 +221,8 @@ numbats_new <- numbats_new %>%
 
 # Count the number of sightings per season
 
-season_sightings <- numbats_new %>%
-  group_by(season) %>%
+season_sightings <- numbats_new |>
+  group_by(season) |>
   summarise(total_sightings = n())
 
 
