@@ -1,0 +1,15 @@
+/* css styles */
+.navbar-dark,{
+  background-color: #7502b8;
+  color: white;
+}
+
+.quarto-title-banner {
+    background-image: url('profile.png');
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    color: #56e8f5;
+    text-shadow: 3px 3px 3px #100cf0, -3px 3px 3px #100cf0, 3px -3px 3px #100cf0, -3px -3px 3px #100cf0;
+}
+
