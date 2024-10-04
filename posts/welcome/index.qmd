@@ -1,7 +1,7 @@
 ---
-title: "Welcome To My Blog Template"
+title: "Numbat Sightings in Australia: A Conservation Study from 2000 to 2023"
 author: "Mohammad Yasin"
-date: "2022-07-18"
+date: "2024-10-04"
 bibliography: references.bib
 categories: [article]
 ---
@@ -22,7 +22,7 @@ This report focuses on analyzing numbat population trends and sightings between 
 
 -  The data used in this report was obtained from the TidyTuesday [@tidytuesday] project, which is a weekly data sharing initiative that provides datasets for analysis and learning. The specific dataset used in this analysis was focused on the numbat population and was accessed via the TidyTuesday GitHub repository.
 
-   We named the data set as **numbats** has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.Below @tbl-dictionary is the glimpse of our data set 
+   We named the data set as **numbats** has 805 observations and 16 variables. The numbats dataset contains observations of Numbat sightings and related environmental data. Key variables include the latitude and longitude coordinates of each sighting, as well as the date and time of the observation. The scientific name of the species observed is recorded, along with a taxon concept identifier for the species. Each sighting is uniquely identified by a record ID, and the data source responsible for the information is noted. The dataset also includes temporal information such as the year, month, day of the week, and hour of each observation. Furthermore, environmental data such as precipitation, maximum temperature, and minimum temperature on the sighting day are provided. Lastly, the dataset records whether the observation took place in Dryandra Woodland.  
 
    
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -119,30 +119,30 @@ First, we examine the distribution of Numbat sightings across Australia, which p
 ```{r}
 #| label: fig-map
 #| fig-cap: "Numbat Sightings in Australia"
-#| fig-width: 10    # Keep reasonable width
-#| fig-height: 6    # Keep reasonable height
+#| fig-width: 10    
+#| fig-height: 6    
 #| warning: false
 #| message: false
 #| echo: false
 
-# Get the map of Australia with state boundaries
+
 australia_map <- ne_states(country = "Australia", returnclass = "sf")
 
-# Define the bounding box for zooming into the sighting region
-sighting_bbox <- st_bbox(c(xmin = 110, xmax = 155, ymin = -40, ymax = -25))  # Adjust to zoom on sightings
 
-# Plot the map with sighting points and zoom into the region
+sighting_bbox <- st_bbox(c(xmin = 110, xmax = 155, ymin = -40, ymax = -25)) 
+
+
 ggplot() +
-  geom_sf(data = australia_map, fill = "lightgray", color = "black") +  # Map of Australia
+  geom_sf(data = australia_map, fill = "lightgray", color = "black") +  
   geom_point(data = numbats_new, aes(x = decimalLongitude, y = decimalLatitude), 
-             color = "blue", size = 3, alpha = 0.8) +  # Larger points with higher opacity
+             color = "blue", size = 3, alpha = 0.8) + 
   coord_sf(xlim = c(sighting_bbox["xmin"], sighting_bbox["xmax"]), 
-           ylim = c(sighting_bbox["ymin"], sighting_bbox["ymax"])) +  # Zoom into the sighting region
-  theme_void() +  # Removes axis, background for minimalist look
+           ylim = c(sighting_bbox["ymin"], sighting_bbox["ymax"])) +  
+  theme_void() +  
   theme(
-    panel.background = element_rect(fill = "#e5e7eb", color = NA),  # Light gray background
-    plot.title = element_text(hjust = 0.5, size = 22, face = "bold"),  # Larger, centered title
-    plot.margin = margin(5, 5, 5, 5)  # Reduce margins for better fit
+    panel.background = element_rect(fill = "#e5e7eb", color = NA),  
+    plot.title = element_text(hjust = 0.5, size = 22, face = "bold"),  
+    plot.margin = margin(5, 5, 5, 5)
   ) +
   labs(title = "Numbat Sightings in Australia")
 
@@ -181,7 +181,6 @@ numbats_year <- numbats_new |>
 
 ggplot(numbats_year, aes(x = year, y = count)) +
   geom_col(fill= "blue") + 
- # geom_line(color = "red", size = 1) +  
   scale_x_continuous(breaks = seq(min(numbats_year$year), max(numbats_year$year), by = 1)) +
   labs(title = "Sightings of Numbats from 2000 to 2023",
        y = "Number of Numbats") +
@@ -217,11 +216,12 @@ numbats_new <- numbats_new %>%
   ))
 
 # Count the number of sightings per season
+
 season_sightings <- numbats_new %>%
   group_by(season) %>%
   summarise(total_sightings = n())
 
-# Plotting the number of sightings per season
+
 ggplot(season_sightings, aes(x = season, y = total_sightings, fill = season)) +
   geom_bar(stat = "identity") +
   labs(title = "Numbat Sightings by Season",
@@ -237,6 +237,18 @@ ggplot(season_sightings, aes(x = season, y = total_sightings, fill = season)) +
 @fig-season shows the number of Numbat sightings across the four seasons. Spring has the highest number of sightings, likely due to favorable conditions such as mild temperatures and abundant food. Summer follows, while Winter records the fewest sightings, suggesting reduced Numbat activity during the colder months.
 
 For both visitors and researchers, Spring and Summer offer the best chances to observe Numbats in the wild. Tourists visiting during these months are more likely to witness Numbat activity, making it an ideal time for wildlife enthusiasts. This seasonal pattern also provides key insights for conservation efforts, helping to focus research and fieldwork when Numbats are more active and visible. Further research during the colder months could provide a better understanding of their habitat use and behavior, improving strategies for conservation and public engagement.
+
+:::
+
+## Conclusion
+
+:::{style="text-align: justify;"}
+
+The numbat population, once widespread across Australia, has faced significant declines due to habitat loss, predation by invasive species, and environmental changes. This study focused on analyzing numbat sightings between 2000 and 2023 to better understand their geographical distribution and seasonal activity, providing essential insights for conservation efforts.
+
+Our analysis revealed that sightings are predominantly concentrated in southwestern Australia, particularly in regions that still support suitable habitats. Seasonal trends showed that sightings peak during the spring, offering an opportunity for targeted conservation actions during these active months. Additionally, the data highlighted a sharp increase in sightings in 2014, which might indicate heightened observation efforts or other influencing factors.
+
+By examining these trends, it becomes evident that there is still much to be done to protect this endangered species. Continued research and conservation initiatives are crucial for ensuring the survival of the numbat in its natural habitats. The insights from this report can aid conservationists and policymakers in focusing their efforts on the regions and seasons most critical to numbat survival.
 
 :::
 
