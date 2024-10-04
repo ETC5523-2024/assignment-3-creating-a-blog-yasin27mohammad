@@ -9,11 +9,11 @@ categories: [article]
 ## **Problem Description**
 
 ::: {style="text-align: justify;"}
-The numbat (Myrmecobius fasciatus) is a small, termite-eating marsupial native to Australia, currently classified as endangered. Once widespread across the country, numbats are now confined to small, isolated areas of eucalypt woodlands due to habitat destruction, predation by invasive species, and environmental changes. Today, fewer than 1,000 numbats remain in the wild, with sightings concentrated mainly in southwestern Australia.
+
+The numbat (`Myrmecobius fasciatus`) is a small, termite-eating marsupial native to Australia, currently classified as endangered. Once widespread across the country, numbats are now confined to small, isolated areas of eucalypt woodlands due to habitat destruction, predation by invasive species, and environmental changes. Today, fewer than 1,000 numbats remain in the wild, with sightings concentrated mainly in southwestern Australia [@wwfnumbat].
 
 This report focuses on analyzing numbat population trends and sightings between 2000 and 2023, including their geographical distribution and seasonal activity patterns. By examining these trends, we aim to provide insights that will support ongoing conservation efforts to protect this unique species.
 
-This report focuses on analyzing numbat population trends and sightings between 2000 and 2023, including their geographical distribution and seasonal activity patterns. By examining these trends, we aim to provide insights that will support ongoing conservation efforts to protect this unique species.
 :::
 
 
@@ -51,7 +51,7 @@ numbats <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/ti
 ```
 
 
--  We also took data from the Global Historical Climatology Network Daily (GHCND) using the **ghcnd_stations()** function. The dataset was filtered for Australian stations (ID starting with “ASN”). The dataset consists of 643 observations and 6 variables and was named **aus_stations**. and includes key variables such as the latitude and longitude coordinates, elevation, station name, station id and WMO ID. 
+-  We also took data from the Global Historical Climatology Network Daily (GHCND) using the `ghcnd_stations()` function. The dataset was filtered for Australian stations (ID starting with “ASN”). The dataset consists of 643 observations and 6 variables and was named **aus_stations**. and includes key variables such as the latitude and longitude coordinates, elevation, station name, station id and WMO ID. 
 
    The variables in the dataset include the station IDs, which identify each Australian station, and the latitude and longitude values that provide the geographic location of the station. The elevation variable records the height of the station above sea level in meters, while the station name provides a label for the station. Lastly, the WMO ID is the numeric identifier assigned to each station by the World Meteorological Organization.
    
@@ -71,7 +71,7 @@ aus_stations <- ghcnd_stations() |>
 
 
 
--  The data cleaning process began by filtering out records from zoo and museum sources to ensure the dataset focuses exclusively on natural numbat sightings. This was achieved using the **filter()** function with the condition **!(dataResourceName %in% c(...))**, where I listed specific museums and institutional providers. By excluding these sources, I ensured that only natural sightings are included.In addition, I filtered out rows with missing values in the year column and restricted the dataset to records from the year 2000 onwards using **!is.na(year)** and **year >= 2000**. This step ensured that the dataset is focused on the relevant time frame for the analysis.Finally, I removed irrelevant columns that were not needed for this analysis, including dryandra, prcp (precipitation), tmax (maximum temperature), and tmin (minimum temperature), to streamline the dataset and keep only the necessary information for further analysis.
+-  The data cleaning process began by filtering out records from zoo and museum sources to ensure the dataset focuses exclusively on natural numbat sightings. This was achieved using the **filter()** function with the condition `!(dataResourceName %in% c(...))`, where I listed specific museums and institutional providers. By excluding these sources, I ensured that only natural sightings are included.In addition, I filtered out rows with missing values in the year column and restricted the dataset to records from the year 2000 onwards using **!is.na(year)** and **year >= 2000**. This step ensured that the dataset is focused on the relevant time frame for the analysis.Finally, I removed irrelevant columns that were not needed for this analysis, including dryandra, prcp (precipitation), tmax (maximum temperature), and tmin (minimum temperature), to streamline the dataset and keep only the necessary information for further analysis.
 
     After cleaning the dataset, the dataResourceName variable contains the following (@tbl-source) categories of data sources. The table below also includes the total number of sightings recorded by each source, reflecting only natural sightings that occurred in Australia between 2000 and 2023.
 
