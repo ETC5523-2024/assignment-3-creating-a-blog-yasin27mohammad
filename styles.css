@@ -5,11 +5,13 @@
 }
 
 .quarto-title-banner {
-    background-image: url('profile.png');
-    background-size: cover;
-    background-position: center;
-    height: 250px;
-    color: #56e8f5;
-    text-shadow: 3px 3px 3px #100cf0, -3px 3px 3px #100cf0, 3px -3px 3px #100cf0, -3px -3px 3px #100cf0;
+  background-image: url('profile.png');
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7); /* Slight black shadow */
 }
+
+
 
