@@ -10,7 +10,7 @@ categories: [article]
 
 ::: {style="text-align: justify;"}
 
-The numbat (`Myrmecobius fasciatus`) is a small, termite-eating marsupial native to Australia, currently classified as endangered. Once widespread across the country, numbats are now confined to small, isolated areas of eucalypt woodlands due to habitat destruction, predation by invasive species, and environmental changes. Today, fewer than 1,000 numbats remain in the wild, with sightings concentrated mainly in southwestern Australia [@wwfnumbat].
+The numbat (**Myrmecobius fasciatus**) is a small, termite-eating marsupial native to Australia, currently classified as endangered. Once widespread across the country, numbats are now confined to small, isolated areas of eucalypt woodlands due to habitat destruction, predation by invasive species, and environmental changes. Today, fewer than 1,000 numbats remain in the wild, with sightings concentrated mainly in southwestern Australia [@wwfnumbat].
 
 This report focuses on analyzing numbat population trends and sightings between 2000 and 2023, including their geographical distribution and seasonal activity patterns. By examining these trends, we aim to provide insights that will support ongoing conservation efforts to protect this unique species.
 
@@ -97,10 +97,11 @@ numbats_new <- numbats |>
   
 ```{r}
 #| label: tbl-source
-#| tbl-cap: "Natural sightings source of numbats"
+#| tbl-cap: "Numbat Sightings Recorded by Data Sources"
 #| warning: false
 #| message: false
 #| echo: false
+
 natural_sightings_summary <- numbats_new%>%
   group_by(dataResourceName) %>%
   summarise(total_sightings = n())
@@ -122,7 +123,7 @@ First, we examine the distribution of Numbat sightings across Australia, which p
 
 ```{r}
 #| label: fig-map
-#| fig-cap: "Numbat Sightings in Australia"
+#| fig-cap: "Geographical Distribution of Numbat Sightings in Australia from 2000 to 2023"
 #| fig-width: 10    
 #| fig-height: 6    
 #| warning: false
@@ -148,7 +149,8 @@ ggplot() +
     plot.title = element_text(hjust = 0.5, size = 22, face = "bold"),  
     plot.margin = margin(5, 5, 5, 5)
   ) +
-  labs(title = "Numbat Sightings in Australia")
+  labs(title = "Numbat Sightings Across Australia: 2000-2023")
+
 
 ```
 
@@ -206,7 +208,7 @@ Continuing from the previous section, where we explored the trend of Numbat sigh
 
 ```{r}
 #| label: fig-season
-#| fig-cap: "Sightings by Season"
+#| fig-cap: "Seasonal Distribution of Numbat Sightings"
 #| warning: false
 #| message: false
 #| echo: false
@@ -223,6 +225,7 @@ numbats_new <- numbats_new |>
 
 season_sightings <- numbats_new |>
   group_by(season) |>
+  
   summarise(total_sightings = n())
 
 
@@ -234,6 +237,7 @@ ggplot(season_sightings, aes(x = season, y = total_sightings, fill = season)) +
   theme_minimal() +
   scale_fill_manual(values = c("Spring" = "skyblue", "Summer" = "lightcoral", 
                                "Winter" = "lightgreen", "Autumn" = "lightgoldenrod"))
+
 
 
 ```

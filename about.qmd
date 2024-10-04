@@ -6,7 +6,10 @@ about:
   links:
     - icon: github
       text: Github
-      href: https://github.com/ETC5523-2024/assignment-3-creating-a-blog-yasin27mohammad
+      href: https://github.com/yasin27mohammad
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/mohammad-yasin-098787232/?trk=eml-email_pymk_02-header-0-profile_glimmer
 
 ---
 
